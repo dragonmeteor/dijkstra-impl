@@ -29,7 +29,7 @@ Vertex names are alpha-numeric strings that can contain underscores. Weights are
 
 ## Output Specification
 
-If there is no path between the source vertex and the destination vertex, the output should contain only one line with the number ``-1``.
+The output should also be contained in a file. If there is no path between the source vertex and the destination vertex, the output should contain only one line with the number ``-1``.
 
 If there is a path, the first line should contain the shortest distance between the source and destnation. Then, starting from the next line, the vertices of the shortest path between the source and the destination should be printed, with one vertex name on its own line.
 
@@ -76,7 +76,7 @@ A D
 
 ## Program Specification
 
-An implementation must be invocable from the command line. The program should take one inputs, which is the name of the input file. It must write output to the standard output.
+An implementation must be invocable from the command line. The program should take two inputs. The first is the input file name, and the second is the output file name.
 
 ## Languages with Implementations
 
