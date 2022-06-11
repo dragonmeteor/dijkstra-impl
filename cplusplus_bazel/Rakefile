@@ -1,0 +1,31 @@
+def run(command)
+    puts(command)
+    system(command)
+end
+
+task :build do
+    command = [
+        "bazel build",
+        "//:main"
+    ].join(" ")
+    run(command)
+end
+
+task :run do
+    command = [
+        "bazel run",
+        "//:main",
+        "--",
+        "../data/00.in.txt",
+    ].join(" ")
+    run(command)
+end
+
+task :refresh do
+    run("rm external")
+    command = [
+        "bazel run",
+        "@hedron_compile_commands//:refresh_all",
+    ].join(" ")
+    run(command)
+end

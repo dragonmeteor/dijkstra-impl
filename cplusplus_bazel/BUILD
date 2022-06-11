@@ -3,4 +3,7 @@ cc_binary(
     srcs = [
         "main.cc",
     ],
+    deps = [
+        "@com_google_absl//absl/strings"
+    ],
 )
