@@ -20,7 +20,7 @@ Next, in VS Code, install the [Bazel plugin](https://marketplace.visualstudio.co
 
 ## Using the Rakefile
 
-The rake file has the following commands.
+The Rakefile has the following commands.
 
 ```
 rake build
