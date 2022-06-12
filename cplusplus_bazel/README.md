@@ -19,6 +19,7 @@ The rake file has the following commands.
 ```
 rake build
 rake run
+rake test
 rake refresh
 ```
 

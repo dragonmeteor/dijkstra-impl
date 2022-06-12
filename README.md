@@ -80,3 +80,4 @@ An implementation must be invocable from the command line. The program should ta
 
 ## Languages with Implementations
 
+* [C++](https://github.com/dragonmeteor/dijkstra-impl/tree/master/cplusplus_bazel)
