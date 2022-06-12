@@ -1,5 +1,11 @@
 # ``cplusplus_bazel``: C++ Built with Bazel
 
+This is an implemention that I went out of my way to imitate Google way of writing C++.
+
+* Using [Bazel](http://bazel.build) as the build tool.
+* Following the conventions in the [Google C++ style guide](https://google.github.io/styleguide/cppguide.html): naming things according to the Google's convention and not using exceptions.
+* Trying to use [Abseil](http://abseil.io) as much as possible.
+
 ## Setting up a development environment
 
 First, we need to install [Bazel](http://bazel.build). On Windows, run the following commands:
