@@ -6,17 +6,27 @@ end
 task :build do
     command = [
         "bazel build",
-        "//:main"
+        "//:main",
+        "//:load_input",
+        "//:graph",
     ].join(" ")
     run(command)
 end
 
-task :run do
+task :run => [:build] do
     command = [
-        "bazel run",
-        "//:main",
-        "--",
+        "bazel-bin/main",
         "../data/00.in.txt",
+        "00.out.txt",
+    ].join(" ")
+    run(command)
+end
+
+task :test do
+    command = [
+        "bazel test",
+        "--test_output=all",
+        "//:graph_test"
     ].join(" ")
     run(command)
 end

@@ -1,25 +1,25 @@
 # ``cplusplus_bazel``: C++ Built with Bazel
 
-First, install [Baselisk](https://github.com/bazelbuild/bazelisk) into your system. In my case, I use [Chocolatey](http://chocolatey.org), so I open the admin terminal and ran the following command.
+## Setting up a development environment
+
+First, we need to install [Bazel](http://bazel.build). On Windows, run the following commands:
 
 ```
-> choco install bazelisk
+choco install bazelisk
+choco install buildifier
+choco install buildozer
 ```
 
-Then, build the main executable by running the following command.
+Next, in VS Code, install the [Bazel plugin](https://marketplace.visualstudio.com/items?itemName=BazelBuild.vscode-bazel) and the [clangd plugin](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd). Then, set up the [Bazel compile commands extractor](https://github.com/hedronvision/bazel-compile-commands-extractor).
+
+## Using the Rakefile
+
+The rake file has the following commands.
 
 ```
-> bazel build //:main
+rake build
+rake run
+rake refresh
 ```
 
-After the above command finishes, you can run the executable by invoking.
-
-```
-> bazel run //:main -- <input-file-name> <output-file-name>
-```
-
-Or, you can do this as well.
-
-```
-> bazel-build/main <input-file-name> <output-file-name>
-```
+Run the last command to so that the clangd plugin can do its job providing autocomplete.
