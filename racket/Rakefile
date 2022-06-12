@@ -1,0 +1,25 @@
+def run(command)
+  puts(command)
+  system(command)
+end
+
+task :run do
+  command = [
+    "racket",
+    "main.rkt",
+    "../in/00.in.txt",
+    "../temp/00.out.txt",
+  ].join(" ")
+  run(command)
+end
+
+task :test do
+  command = [
+    "racket",
+    "graph-test.rkt",
+  ].join(" ")
+  run(command)
+end
+
+task :default do
+end
