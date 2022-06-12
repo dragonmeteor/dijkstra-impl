@@ -35,30 +35,26 @@
           (error (string-append "Input vertex " (~a vertex) " not a string!")))
         (when (hash-has-key? adj-lists- vertex)
           (error (string-append "Vertex '" vertex "' already exists")))
-        (hash-set! adj-lists- vertex '())
+        (hash-set! adj-lists- vertex (make-gvector))
       )
     )
 
     (define/public (add-edge v0 v1 weight)
-      (when (not (has-vertex? v0)) 
+      (when (not (send this has-vertex? v0)) 
         (error (string-append "Vertex " (~a v0) " does not exists.")))
-      (when (not (has-vertex? v1))
+      (when (not (send this has-vertex? v1))
         (error (string-append "Vertex " (~a v1) " does not exists.")))
       (when (not (real? weight))
         (error (string-append "Weight " (~a weight) " is not a real number.")))
-      (let*
-        [
-          (v0-adj-list (hash-ref adj-lists- v0))
-          (new-list (cons (new edge% (source v0) (dest v1) (weight weight)) v0-adj-list))
-        ] 
-        (hash-set! adj-lists- v0 new-list)
+      (let [(v0-adj-list (hash-ref adj-lists- v0))] 
+        (gvector-add! v0-adj-list (new edge% (source v0) (dest v1) (weight weight)))
       )      
     )
 
     (define/public (has-vertex? vertex) (hash-has-key? adj-lists- vertex))
 
     (define/public (get-adj-list vertex) 
-      (when (not (has-vertex? vertex))
+      (when (not (send this has-vertex? vertex))
         (error (string-append "Vertex " (~a vertex) " does not exists.")))
       (hash-ref adj-lists- vertex)
     )

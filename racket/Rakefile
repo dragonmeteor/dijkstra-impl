@@ -16,7 +16,7 @@ end
 task :test do
   command = [
     "racket",
-    "graph-test.rkt",
+    "test.rkt",
   ].join(" ")
   run(command)
 end
