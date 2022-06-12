@@ -47,9 +47,12 @@ class Graph {
   absl::Status AddVertex(absl::string_view name);
   const absl::flat_hash_map<absl::string_view, const Vertex*>& GetNameToVertexMap() const;
   absl::optional<const Vertex*> GetVertex(absl::string_view name) const;
+  int num_vertices() const;
+  bool Contains(const Vertex* vertex) const;
 
   absl::Status AddEdge(const Vertex* source, const Vertex* dest, double weight);
   absl::StatusOr<const std::vector<const Edge*>*> GetAdjList(const Vertex* v) const;
+  int num_edges() const;
 
  private:
   std::vector<std::unique_ptr<Vertex>> vertices_;

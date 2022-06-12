@@ -46,11 +46,17 @@ absl::optional<const Vertex*> Graph::GetVertex(absl::string_view name) const {
   return name_to_vertex_.at(name);
 }
 
+int Graph::num_vertices() const {
+    return vertices_.size();
+}
+
+bool Graph::Contains(const Vertex* vertex) const {
+  return vertex_to_adj_list_.contains(vertex);
+}
+
 absl::Status Graph::AddEdge(const Vertex* source, const Vertex* dest, double weight) {
   if (vertex_to_adj_list_.find(source) == vertex_to_adj_list_.end()) {
     return absl::InvalidArgumentError("Source vertex is not in the graph.");
-  } else {
-    std::cout << vertex_to_adj_list_.find(source)->second << std::endl;
   }
   if (vertex_to_adj_list_.find(dest) == vertex_to_adj_list_.end()) {
     return absl::InvalidArgumentError("Target vertex is not in the graph");
@@ -69,4 +75,8 @@ absl::StatusOr<const std::vector<const Edge*>*> Graph::GetAdjList(const Vertex* 
         absl::StrCat("The vertex with name '", v->name(), "' is not in the graph"));
   }
   return vertex_to_adj_list_.at(v);
+}
+
+int Graph::num_edges() const {
+    return edges_.size();
 }

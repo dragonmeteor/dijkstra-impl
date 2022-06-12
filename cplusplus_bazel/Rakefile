@@ -9,6 +9,8 @@ task :build do
         "//:main",
         "//:load_input",
         "//:graph",
+        "//:binary_heap",
+        "//:dijkstra",
     ].join(" ")
     run(command)
 end
@@ -17,7 +19,8 @@ task :run => [:build] do
     command = [
         "bazel-bin/main",
         "../data/00.in.txt",
-        "00.out.txt",
+        "../temp/00.out.txt",
+        "--stderrthreshold=0",
     ].join(" ")
     run(command)
 end
@@ -26,7 +29,8 @@ task :test do
     command = [
         "bazel test",
         "--test_output=all",
-        "//:graph_test"
+        "//:graph_test",
+        "//:binary_heap_test",
     ].join(" ")
     run(command)
 end
