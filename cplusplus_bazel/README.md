@@ -4,7 +4,7 @@ This is an implemention that I went out of my way to imitate Google way of writi
 
 * Using [Bazel](http://bazel.build) as the build tool.
 * Following the conventions in the [Google C++ style guide](https://google.github.io/styleguide/cppguide.html): naming things according to the Google's convention and not using exceptions.
-* Trying to use [Abseil](http://abseil.io) as much as possible.
+* Using other Google libraries such as [Abseil](http://abseil.io), [GoogleTest](https://github.com/google/googletest), [Google Logging Library](https://github.com/google/glog), and [gflags](https://gflags.github.io/gflags/).
 
 ## Setting up a development environment
 
