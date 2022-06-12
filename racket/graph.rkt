@@ -27,7 +27,7 @@
 
     (super-new)
 
-    (define/public (get-num-vertices) (hash-count adj-lists-))
+    (define/public (get-vertex-count) (hash-count adj-lists-))
     
     (define/public (add-vertex vertex) 
       (begin 

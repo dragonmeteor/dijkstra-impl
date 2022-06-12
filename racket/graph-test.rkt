@@ -10,7 +10,7 @@
   (test-suite "graph% tests"
     (test-case "New graph% should have zero vertices"
       (define g (new graph%))
-      (check-equal? (send g get-num-vertices) 0)
+      (check-equal? (send g get-vertex-count) 0)
     )
     
     (test-case "add-vertex of non-string argument should fail"
@@ -25,7 +25,7 @@
       (send g add-vertex "B")
       (send g add-vertex "C")
 
-      (check-equal? (send g get-num-vertices) 3)
+      (check-equal? (send g get-vertex-count) 3)
       
       (check-true (send g has-vertex? "A"))
       (check-true (send g has-vertex? "B"))
