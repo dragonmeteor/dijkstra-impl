@@ -7,3 +7,14 @@ Install [Racket](http://racket-lang.org) into your system. In case you use Windo
 ```
 choco install racket
 ```
+
+## Using the Rakefile
+
+The Rakefile has the following commands.
+
+```
+rake run
+rake test
+```
+
+They do what you think they are supposed to do.
