@@ -7,8 +7,8 @@ task :run do
   command = [
     "racket",
     "main.rkt",
-    "../in/00.in.txt",
-    "../temp/00.out.txt",
+    "../data/01.in.txt",
+    "../temp/01.out.txt",
   ].join(" ")
   run(command)
 end

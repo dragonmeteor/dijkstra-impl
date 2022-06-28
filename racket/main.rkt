@@ -5,19 +5,61 @@
 
 (define args (current-command-line-arguments))
 
-(when #f
-  (if (< (vector-length args) 2)
-    (display "Usage: racket main.rkt <input-file-name> <output-file-name>\n")  
-    (begin
-      (display (string-append "input-file-name = " (vector-ref args 0) "\n"))
-      (display (string-append "output-file-name = "(vector-ref args 1) "\n"))
+(if (< (vector-length args) 2)
+  (display "Usage: racket main.rkt <input-file-name> <output-file-name>\n")  
+  (let ()
+    (define input-file-name (vector-ref args 0))
+    (define output-file-name (vector-ref args 1))
+    (define g (new graph%))
+    (define source "")
+    (define dest "")
+
+    (call-with-input-file input-file-name
+      (lambda (fin) 
+        (define n-str (read-line fin))
+        (define n (string->number n-str))
+        (for ((i (in-range n)))
+          (define line (read-line fin))
+          (define vertex (string-trim line))
+          (send g add-vertex! vertex)
+        )
+
+        (define m-str (read-line fin))
+        (define m (string->number m-str))
+        (for ((i (in-range m)))
+          (define line (read-line fin))
+          (define comps (string-split line " "))
+          (when (< (length comps) 3)
+            (error (string-append "Line '" (string-trim line) "' is not formatted correctly."))
+          )
+          (define u (string-trim (car comps)))
+          (define v (string-trim (cadr comps)))
+          (define weight (string->number (caddr comps)))
+          (send g add-edge! u v weight)
+        )
+
+        (define source-dest-line (read-line fin))
+        (define comps (string-split source-dest-line " "))
+        (when (< (length comps) 2)
+          (error (string-append "line '" (string-trim source-dest-line) "' is not formatted correctly."))
+        )
+        (set! source (car comps))
+        (set! dest (cadr comps))
+      )
+    )
+
+    (define result (run-dijkstra g source))
+
+    (call-with-output-file output-file-name #:exists 'truncate
+      (lambda (fout)
+        (if (not (send result has-distance? dest))
+          (display "-1\n" fout)
+          (begin
+            (display (send result get-distance dest) fout)
+            (newline fout)
+          )
+        )
+      )
     )
   )
 )
-
-;(define g (new graph%))
-;(send g add-vertex! "A")
-;(send g add-vertex! "B")
-;(send g add-edge! "A" "B" 1.0)
-
-;(define result (run-dijkstra g "A"))
