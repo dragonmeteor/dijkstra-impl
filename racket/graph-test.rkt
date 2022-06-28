@@ -13,17 +13,17 @@
       (check-equal? (send g get-vertex-count) 0)
     )
     
-    (test-case "add-vertex of non-string argument should fail"
+    (test-case "add-vertex! of non-string argument should fail"
       (define g  (new graph%))
-      (check-exn exn:fail? (lambda () (send g add-vertex 0)))
+      (check-exn exn:fail? (lambda () (send g add-vertex! 0)))
     )
 
-    (test-case "add-vertex should behave sensibly"
+    (test-case "add-vertex! should behave sensibly"
       (define g  (new graph%))
       
-      (send g add-vertex "A")
-      (send g add-vertex "B")
-      (send g add-vertex "C")
+      (send g add-vertex! "A")
+      (send g add-vertex! "B")
+      (send g add-vertex! "C")
 
       (check-equal? (send g get-vertex-count) 3)
       
@@ -38,9 +38,9 @@
     (test-case "get-adj-list should behave sensibly"
       (define g  (new graph%))
       
-      (send g add-vertex "A")
-      (send g add-vertex "B")
-      (send g add-vertex "C")
+      (send g add-vertex! "A")
+      (send g add-vertex! "B")
+      (send g add-vertex! "C")
       
       (check-eq? (gvector-count (send g get-adj-list "A")) 0)
       (check-eq? (gvector-count (send g get-adj-list "B")) 0)
@@ -54,16 +54,16 @@
     (test-case "adding duplicated vertices should throw excpetion"
       (define g (new graph%))
 
-      (send g add-vertex "A")
-      (check-exn exn:fail? (lambda () (send g add-vertex "A")))
+      (send g add-vertex! "A")
+      (check-exn exn:fail? (lambda () (send g add-vertex! "A")))
     )
 
     (test-case "adding an edge should behave sensibly"
       (define g (new graph%))
       
-      (send g add-vertex "A")
-      (send g add-vertex "B")
-      (send g add-edge "A" "B" 10)
+      (send g add-vertex! "A")
+      (send g add-vertex! "B")
+      (send g add-edge! "A" "B" 10)
 
       (define A-adj-list (send g get-adj-list "A"))
       (check-equal? (gvector-count A-adj-list) 1)
@@ -76,11 +76,11 @@
     (test-case "adding multiple edges should behave sensibly"
       (define g (new graph%))
       
-      (send g add-vertex "A")
-      (send g add-vertex "B")
-      (send g add-vertex "C")
-      (send g add-edge "A" "B" 10)
-      (send g add-edge "A" "C" 20)
+      (send g add-vertex! "A")
+      (send g add-vertex! "B")
+      (send g add-vertex! "C")
+      (send g add-edge! "A" "B" 10)
+      (send g add-edge! "A" "C" 20)
 
       (define A-adj-list (send g get-adj-list "A"))
       (check-equal? (gvector-count A-adj-list) 2)

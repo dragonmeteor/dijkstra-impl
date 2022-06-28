@@ -29,7 +29,7 @@
 
     (define/public (get-vertex-count) (hash-count adj-lists-))
     
-    (define/public (add-vertex vertex) 
+    (define/public (add-vertex! vertex) 
       (begin 
         (when (not (string? vertex))
           (error (string-append "Input vertex " (~a vertex) " not a string!")))
@@ -39,7 +39,7 @@
       )
     )
 
-    (define/public (add-edge v0 v1 weight)
+    (define/public (add-edge! v0 v1 weight)
       (when (not (send this has-vertex? v0)) 
         (error (string-append "Vertex " (~a v0) " does not exists.")))
       (when (not (send this has-vertex? v1))
