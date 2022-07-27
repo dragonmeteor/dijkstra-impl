@@ -32,10 +32,10 @@ class BinaryHeap {
   bool IsHeapOrder() const {
     for (int i = 0; i < entries_.size(); i++) {
       const auto& entry = entries_[i];
-      if (i * 2 < entries_.size() && entries_[i * 2].value < entry.value) {
+      if (i * 2 + 1 < entries_.size() && entries_[i * 2 + 1].value < entry.value) {
         return false;
       }
-      if (i * 2 + 1 < entries_.size() && entries_[i * 2 + 1].value < entry.value) {
+      if (i * 2 + 2 < entries_.size() && entries_[i * 2 + 2].value < entry.value) {
         return false;
       }
     }
@@ -125,12 +125,12 @@ class BinaryHeap {
   void PercolateDown(int index) {
     while (index < entries_.size()) {
       int min_index = index;
-      if (2 * index < entries_.size() && entries_[2 * index].value < entries_[min_index].value) {
-        min_index = 2 * index;
-      }
-      if (2 * index + 1 < entries_.size() &&
-          entries_[2 * index + 1].value < entries_[min_index].value) {
+      if (2 * index + 1 < entries_.size() && entries_[2 * index + 1].value < entries_[min_index].value) {
         min_index = 2 * index + 1;
+      }
+      if (2 * index + 2 < entries_.size() &&
+          entries_[2 * index + 2].value < entries_[min_index].value) {
+        min_index = 2 * index + 2;
       }
       if (min_index == index) {
         break;
@@ -142,7 +142,7 @@ class BinaryHeap {
 
   void PercolateUp(int index) {
     while (index > 0) {
-      int parent_index = index / 2;
+      int parent_index = (index - 1) / 2;
       if (entries_[parent_index].value > entries_[index].value) {
         Swap(parent_index, index);
         index = parent_index;
