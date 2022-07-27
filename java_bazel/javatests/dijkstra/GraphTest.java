@@ -1,13 +1,12 @@
 package dijkstra;
 
 import com.google.common.collect.ImmutableList;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThrows;
 
 @RunWith(JUnit4.class)
 public class GraphTest {
@@ -96,5 +95,18 @@ public class GraphTest {
             .build());
 
     assertThat(exception).hasMessageThat().startsWith("Vertex 'A' does not exists!");
+  }
+
+  @Test
+  public void build_addEdgeWithNegativeWeight() {
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> Graph.builder()
+            .addVertex("A")
+            .addVertex("B")
+            .addEdge("A", "B", -10)
+            .build());
+
+    assertThat(exception).hasMessageThat().startsWith("Edge weight must be non-negative.");
   }
 }

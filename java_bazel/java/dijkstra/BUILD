@@ -21,3 +21,12 @@ java_library(
         "@com_google_guava",
     ],
 )
+
+java_library(
+    name = "BinaryHeap",
+    srcs = ["BinaryHeap.java"],
+    deps = [
+        "@com_google_auto_value",
+        "@com_google_guava",
+    ],
+)

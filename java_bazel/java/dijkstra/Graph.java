@@ -27,6 +27,7 @@ public abstract class Graph {
       Preconditions.checkArgument(!name.isEmpty(), "Vertex name cannot be empty!");
       Preconditions.checkArgument(!vertices.contains(name), String.format("Vertex '%s' already exists!", name));
       vertices.add(name);
+      vertexToAdjList.put(name, new ArrayList<>());
       return this;
     }
 
@@ -34,12 +35,6 @@ public abstract class Graph {
       Preconditions.checkArgument(vertices.contains(source), String.format("Vertex '%s' does not exists!", source));
       Preconditions.checkArgument(vertices.contains(dest), String.format("Vertex '%s' does not exists!", dest));
       Preconditions.checkArgument(weight >= 0, "Edge weight must be non-negative.");
-      if (!vertexToAdjList.containsKey(source)) {
-        vertexToAdjList.put(source, new ArrayList<>());
-      }
-      if (!vertexToAdjList.containsKey("dest")) {
-        vertexToAdjList.put(dest, new ArrayList<>());
-      }
       ArrayList<Edge> adjList = vertexToAdjList.get(source);
       adjList.add(Edge.create(source, dest, weight));
       return this;

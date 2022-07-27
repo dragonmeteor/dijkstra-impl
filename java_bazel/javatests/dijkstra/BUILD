@@ -10,3 +10,14 @@ java_test(
         "@junit",
     ],
 )
+
+java_test(
+    name = "BinaryHeapTest",
+    srcs = ["BinaryHeapTest.java"],
+    deps = [
+        "//java/dijkstra:BinaryHeap",
+        "@com_google_truth",
+        "@com_google_truth_java8",
+        "@junit",
+    ],
+)
