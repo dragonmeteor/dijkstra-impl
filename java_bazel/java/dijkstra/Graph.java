@@ -20,24 +20,29 @@ public abstract class Graph {
   public abstract ImmutableMap<String, ImmutableList<Edge>> vertexToAdjList();
 
   public static class Builder {
-    private HashSet<String> vertices = new HashSet<>();
-    private HashMap<String, ArrayList<Edge>> vertexToAdjList = new HashMap<>();
+    private final HashSet<String> vertices = new HashSet<>();
+    private final HashMap<String, ArrayList<Edge>> vertexToAdjList = new HashMap<>();
 
-    public void addVertex(String name) {
+    public Builder addVertex(String name) {
       Preconditions.checkArgument(!name.isEmpty(), "Vertex name cannot be empty!");
       Preconditions.checkArgument(!vertices.contains(name), String.format("Vertex '%s' already exists!", name));
       vertices.add(name);
+      return this;
     }
 
-    public void addEdge(String source, String dest, double weight) {
+    public Builder addEdge(String source, String dest, double weight) {
       Preconditions.checkArgument(vertices.contains(source), String.format("Vertex '%s' does not exists!", source));
       Preconditions.checkArgument(vertices.contains(dest), String.format("Vertex '%s' does not exists!", dest));
       Preconditions.checkArgument(weight >= 0, "Edge weight must be non-negative.");
       if (!vertexToAdjList.containsKey(source)) {
         vertexToAdjList.put(source, new ArrayList<>());
       }
+      if (!vertexToAdjList.containsKey("dest")) {
+        vertexToAdjList.put(dest, new ArrayList<>());
+      }
       ArrayList<Edge> adjList = vertexToAdjList.get(source);
       adjList.add(Edge.create(source, dest, weight));
+      return this;
     }
 
     public Graph build() {
@@ -50,7 +55,7 @@ public abstract class Graph {
     }
   }
 
-  public Builder builder() {
+  public static Builder builder() {
     return new Builder();
   }
 }

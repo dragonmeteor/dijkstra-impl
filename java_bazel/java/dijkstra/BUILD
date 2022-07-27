@@ -1,3 +1,9 @@
+package(
+    default_visibility = [
+        "//javatests/dijkstra:__pkg__",
+    ],
+)
+
 java_library(
     name = "Edge",
     srcs = ["Edge.java"],
