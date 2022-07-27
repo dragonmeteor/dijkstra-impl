@@ -12,4 +12,5 @@ choco install buildifier
 choco install buildozer
 ```
 
-Install the [Bazel plugin](https://ij.bazel.build/) in Intellij IDEA.
+Install the [Bazel plugin](https://ij.bazel.build/) in Intellij IDEA. Then, do "File > Import Bazel Project..." and
+import the ``java_bazel`` directory.

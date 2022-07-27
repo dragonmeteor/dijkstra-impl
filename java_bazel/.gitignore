@@ -1,1 +1,5 @@
 .ijwb
+bazel-bin
+bazel-java_bazel
+bazel-out
+bazel-testlogs!/java/
