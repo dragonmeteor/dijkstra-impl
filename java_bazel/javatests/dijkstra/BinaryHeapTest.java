@@ -41,4 +41,67 @@ public class BinaryHeapTest {
 
     assertThat(heap.isHeapOrder()).isFalse();
   }
+
+  @Test
+  public void swap() {
+    BinaryHeap<String, Double> heap = new BinaryHeap<>();
+    heap.addRaw("A", 10.0);
+    heap.addRaw("B", 20.0);
+    heap.addRaw("C", 5.0);
+
+    heap.checkRep();
+    heap.swap(1,2);
+    heap.checkRep();
+  }
+
+  @Test
+  public void build() {
+    BinaryHeap<String, Double> heap = new BinaryHeap<>();
+    heap.addRaw("A", 10.0);
+    heap.addRaw("B", 20.0);
+    heap.addRaw("C", 5.0);
+
+    heap.checkRep();
+    assertThat(heap.isHeapOrder()).isFalse();
+    heap.build();
+    heap.checkRep();
+    assertThat(heap.isHeapOrder()).isTrue();
+  }
+
+  @Test
+  public void add() {
+    BinaryHeap<String, Double> heap = new BinaryHeap<>();
+    heap.add("A", 10.0);
+    heap.add("B", 20.0);
+    heap.add("C", 5.0);
+
+    assertThat(heap.isHeapOrder()).isTrue();
+  }
+
+  @Test
+  public void deleteMin() {
+    BinaryHeap<String, Double> heap = new BinaryHeap<>();
+    heap.add("A", 10.0);
+    heap.add("B", 20.0);
+    heap.add("C", 5.0);
+
+    assertThat(heap.deleteMin()).hasValue("C");
+    assertThat(heap.deleteMin()).hasValue("A");
+    assertThat(heap.deleteMin()).hasValue("B");
+    assertThat(heap.deleteMin()).isEmpty();
+  }
+
+  @Test
+  public void changeValue() {
+    BinaryHeap<String, Double> heap = new BinaryHeap<>();
+    heap.add("A", 10.0);
+    heap.add("B", 20.0);
+    heap.add("C", 5.0);
+    heap.changeValue("B", 1.0);
+
+    assertThat(heap.deleteMin()).hasValue("B");
+    assertThat(heap.deleteMin()).hasValue("C");
+    assertThat(heap.deleteMin()).hasValue("A");
+    assertThat(heap.deleteMin()).isEmpty();
+  }
 }

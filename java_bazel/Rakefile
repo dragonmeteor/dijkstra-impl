@@ -2,3 +2,20 @@ def run(command)
   puts(command)
   system(command)
 end
+
+task :build do
+    command = [
+        "bazel build",
+        "//java/dijkstra:Main",
+    ].join(" ")
+    run(command)
+end
+
+task :run => [:build] do
+    command = [
+        "bazel-bin/java/dijkstra/Main.exe",
+        "../data/00.in.txt",
+        "../temp/00.out.txt"
+    ].join(" ")
+    run(command)
+end
