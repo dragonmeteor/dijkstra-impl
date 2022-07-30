@@ -19,3 +19,13 @@ task :run => [:build] do
     ].join(" ")
     run(command)
 end
+
+task :test do
+    command = [
+        "bazel test",
+        "//javatests/dijkstra:BinaryHeapTest",
+        "//javatests/dijkstra:DijkstraTest",
+        "//javatests/dijkstra:GraphTest",
+    ].join(" ")
+    run(command)
+end
